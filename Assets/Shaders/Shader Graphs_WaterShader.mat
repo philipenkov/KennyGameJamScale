@@ -56,7 +56,7 @@ Material:
     m_Colors:
     - _Color: {r: 0.054901943, g: 0.5407845, b: 0.54901963, a: 1}
     - _Direction: {r: 0.05, g: 0.1, b: 0, a: 0}
-    - _Tiling: {r: 4, g: 4, b: 0, a: 0}
+    - _Tiling: {r: -4, g: -4, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &341185408173341088
