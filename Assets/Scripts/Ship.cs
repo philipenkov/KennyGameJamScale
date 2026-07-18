@@ -11,6 +11,9 @@ public enum ShipType
 public class Ship : MonoBehaviour
 {
     [SerializeField] private GameObject hoveredAnimationObject;
+    [SerializeField] private Transform playerSpawnTransform;
+    
+    public Transform PlayerSpawnTransform => playerSpawnTransform;
 
     private void Awake()
     {

@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class ShipSelection : MonoBehaviour
 {
+    public event Action<Ship> ShipClicked;
+    
     [SerializeField] private Camera mainCamera;
     [SerializeField] private LayerMask shipsLayer;
     [SerializeField] private GameLoop gameLoop;
@@ -26,6 +28,16 @@ public class ShipSelection : MonoBehaviour
         else if (_isShipHovered)
         {
             ResetHover();
+        }
+
+        if (_isShipHovered)
+        {
+            if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                ShipClicked?.Invoke(_hoveredShip);
+                ResetHover();
+                SwitchSelection(false);
+            }
         }
     }
 
