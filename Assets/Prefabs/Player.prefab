@@ -168,6 +168,7 @@ MonoBehaviour:
   jumpHeight: 1.5
   playerCamera: {fileID: 0}
   cameraPlace: {fileID: 4268862382905621125}
+  canonTransform: {fileID: 6553202067371660776}
   mouseSensitivity: 0.1
   upperLookLimit: -80
   lowerLookLimit: 80

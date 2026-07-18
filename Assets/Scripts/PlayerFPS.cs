@@ -10,6 +10,7 @@ public class PlayerFPS : MonoBehaviour
 
     [SerializeField] private Transform playerCamera;
     [SerializeField] private Transform cameraPlace;
+    [SerializeField] private Transform canonTransform;
     [SerializeField] private float mouseSensitivity = 0.1f;
     [SerializeField] private float upperLookLimit = -80f;
     [SerializeField] private float lowerLookLimit = 80f;
@@ -102,5 +103,10 @@ public class PlayerFPS : MonoBehaviour
         _verticalRotation = Mathf.Clamp(_verticalRotation, upperLookLimit, lowerLookLimit);
 
         playerCamera.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+
+        if (canonTransform != null)
+        {
+            canonTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
+        }
     }
 }
