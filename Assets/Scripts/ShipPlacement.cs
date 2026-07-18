@@ -14,19 +14,21 @@ public class ShipPlacement : MonoBehaviour
     [SerializeField] private Board board;
     [SerializeField] private LayerMask boardLayer;
 
-    [SerializeField] private GameObject smallShip;
-    [SerializeField] private GameObject mediumShip;
-    [SerializeField] private GameObject bigShip;
+    [SerializeField] private FollowingShip smallShip;
+    [SerializeField] private FollowingShip mediumShip;
+    [SerializeField] private FollowingShip bigShip;
     
     [SerializeField] private PlacementConfig[] placementConfigs;
 
     private int _currentConfigId;
     private PlaceDirection _currentDirection = PlaceDirection.Right;
     private bool _isActive;
+    private FollowingShip _currentShip;
 
     private void Start()
     {
         _isActive = true; //TODO: Заменить на вызов откуда-то
+        ShowShipToPlace();
     }
 
     private void Update()
@@ -34,6 +36,7 @@ public class ShipPlacement : MonoBehaviour
         if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
         {
             _currentDirection = _currentDirection == PlaceDirection.Right ? PlaceDirection.Up : PlaceDirection.Right;
+            _currentShip.Rotate(_currentDirection);
         }
         
         if (_isActive)
@@ -47,6 +50,11 @@ public class ShipPlacement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, float.MaxValue, boardLayer))
         {
+            if (_currentShip != null)
+            {
+                _currentShip.SetTargetPosition(hit.point);
+            }
+
             if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
             {
                 TryToPlace(hit.point);
@@ -62,6 +70,7 @@ public class ShipPlacement : MonoBehaviour
         {
             Debug.Log("===PLACED");
             _currentConfigId++;
+            ShowShipToPlace();
             if (_currentConfigId >= placementConfigs.Length)
             {
                 //TODO: закончилась фаза расстановки
@@ -76,46 +85,55 @@ public class ShipPlacement : MonoBehaviour
 
     private bool ArePlacesFree(Vector2Int startCellPosition, PlaceDirection direction, PlacementConfig config)
     {
-        Cell startCell = board.GetCell(startCellPosition);
+        Vector2Int step = direction == PlaceDirection.Right ? Vector2Int.right : Vector2Int.up;
+        int numberOfCells = config.NumberOfCells;
 
-        if (startCell == null || startCell.IsOccupied)
+        for (int i = 0; i < numberOfCells; i++)
         {
-            return false; //TODO: нотификатор, что нельзя поставить
+            Vector2Int nextCellPosition = startCellPosition + step * i;
+            Cell nextCell = board.GetCell(nextCellPosition);
+                
+            if (nextCell == null || nextCell.IsOccupied)
+            {
+                return false; //TODO: нотификатор, что нельзя поставить
+            }
         }
         
-        int numberOfCells = config.NumberOfCells;
-        if (numberOfCells == 1)
-        {
-            return true;
-        }
+        return true;
+    }
 
-        if (direction == PlaceDirection.Right)
+    private void ShowShipToPlace()
+    {
+        if (_currentConfigId >= placementConfigs.Length)
         {
-            for (int i = 0; i < numberOfCells; i++)
-            {
-                Vector2Int nextCellPosition = startCellPosition + new Vector2Int(i, 0);
-                Cell nextCell = board.GetCell(nextCellPosition);
-                if (nextCell == null || nextCell.IsOccupied)
-                {
-                    return false;
-                }
-            }
-            
-            return true;
+            TurnOffAllFollowingShips();
+            return;
         }
-        else
+        
+        ShipType shipType = placementConfigs[_currentConfigId].ShipType;
+        TurnOffAllFollowingShips();
+
+        switch (shipType)
         {
-            for (int i = 0; i < numberOfCells; i++)
-            {
-                Vector2Int nextCellPosition = startCellPosition + new Vector2Int(0, i);
-                Cell nextCell = board.GetCell(nextCellPosition);
-                if (nextCell == null || nextCell.IsOccupied)
-                {
-                    return false;
-                }
-            }
-            
-            return true;
+            case ShipType.Small:
+                _currentShip = smallShip;
+                break;
+            case ShipType.Medium:
+                _currentShip = mediumShip;
+                break;
+            case ShipType.Big:
+                _currentShip = bigShip;
+                break;
         }
+        
+        _currentShip.SwitchFollowing(true);
+        _currentShip.Rotate(_currentDirection);
+    }
+
+    private void TurnOffAllFollowingShips()
+    {
+        smallShip.SwitchFollowing(false);
+        mediumShip.SwitchFollowing(false);
+        bigShip.SwitchFollowing(false);
     }
 }

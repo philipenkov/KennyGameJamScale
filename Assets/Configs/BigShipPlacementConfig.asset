@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceda6844d02d4a13acbbf91ec3792f12, type: 3}
   m_Name: BigShipPlacementConfig
   m_EditorClassIdentifier: Assembly-CSharp::PlacementConfig
-  NumberOfCells: 0
-  ShipType: 0
+  NumberOfCells: 3
+  ShipType: 2
