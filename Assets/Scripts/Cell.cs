@@ -3,7 +3,7 @@
 public class Cell
 {
     public Vector2Int Position { get; private set; }
-    public bool IsOccupied { get; set; }
+    public bool IsOccupied { get; private set; }
 
     public Cell(int x, int y)
     {

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlacementConfig
   NumberOfCells: 1
   ShipType: 0
+  ShipPrefab: {fileID: 8106142629106983687, guid: 5ec44bf0275c26d4ab6d1395496b815e, type: 3}

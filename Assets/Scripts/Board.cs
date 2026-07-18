@@ -59,7 +59,7 @@ public class Board : MonoBehaviour
 
     public Vector3 CellToWorld(Vector2Int cell)
     {
-        return origin.position + new Vector3(cell.x * cellSize, 0f, cell.y * cellSize);
+        return origin.position + new Vector3((cell.x + 0.5f) * cellSize, 0f, (cell.y + 0.5f) * cellSize);
     }
 
     public bool TryGetCell(Vector3 worldPosition, out Cell cell)

@@ -5,4 +5,5 @@ public class PlacementConfig : ScriptableObject
 {
     public int NumberOfCells;
     public ShipType ShipType;
+    public GameObject ShipPrefab;
 }

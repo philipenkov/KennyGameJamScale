@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,7 @@ public class ShipPlacement : MonoBehaviour
     private PlaceDirection _currentDirection = PlaceDirection.Right;
     private bool _isActive;
     private FollowingShip _currentShip;
+    private List<Cell> _checkedCells = new List<Cell>();
 
     private void Start()
     {
@@ -66,9 +68,20 @@ public class ShipPlacement : MonoBehaviour
     {
         var cellPosition = board.WorldToCell(position);
 
-        if (ArePlacesFree(cellPosition, _currentDirection, placementConfigs[_currentConfigId]))
+        if (ArePlacesFree(cellPosition, _currentDirection, placementConfigs[_currentConfigId], ref _checkedCells))
         {
             Debug.Log("===PLACED");
+
+            foreach (var cell in _checkedCells)
+            {
+                cell.Occupy();
+            }
+
+            Quaternion rotation;
+
+            rotation = Quaternion.Euler(0, _currentDirection == PlaceDirection.Up ? 0 : 90, 0);
+
+            GameObject realShipObject = Instantiate(placementConfigs[_currentConfigId].ShipPrefab, board.CellToWorld(cellPosition), rotation);
             _currentConfigId++;
             ShowShipToPlace();
             if (_currentConfigId >= placementConfigs.Length)
@@ -83,8 +96,9 @@ public class ShipPlacement : MonoBehaviour
         }
     }
 
-    private bool ArePlacesFree(Vector2Int startCellPosition, PlaceDirection direction, PlacementConfig config)
+    private bool ArePlacesFree(Vector2Int startCellPosition, PlaceDirection direction, PlacementConfig config, ref List<Cell> checkedCells)
     {
+        checkedCells.Clear();
         Vector2Int step = direction == PlaceDirection.Right ? Vector2Int.right : Vector2Int.up;
         int numberOfCells = config.NumberOfCells;
 
@@ -95,8 +109,10 @@ public class ShipPlacement : MonoBehaviour
                 
             if (nextCell == null || nextCell.IsOccupied)
             {
+                checkedCells.Clear();
                 return false; //TODO: нотификатор, что нельзя поставить
             }
+            checkedCells.Add(nextCell);
         }
         
         return true;
