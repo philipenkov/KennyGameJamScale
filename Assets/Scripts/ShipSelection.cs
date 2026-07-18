@@ -6,18 +6,24 @@ public class ShipSelection : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private LayerMask shipsLayer;
+    [SerializeField] private GameLoop gameLoop;
     
-    private bool isActive;
-    private bool isShipHovered;
+    private bool _isActive;
+    private bool _isShipHovered;
     private Ship _hoveredShip;
+
+    private void Start()
+    {
+        gameLoop.GameStateChanged += HandleGameLoopChanged;
+    }
 
     private void Update()
     {
-        if (isActive)
+        if (_isActive)
         {
             DoRaycast();
         }
-        else if (isShipHovered)
+        else if (_isShipHovered)
         {
             ResetHover();
         }
@@ -36,7 +42,7 @@ public class ShipSelection : MonoBehaviour
                 if (_hoveredShip != ship)
                 {
                     _hoveredShip = ship;
-                    isShipHovered = true;
+                    _isShipHovered = true;
                     
                     _hoveredShip.PlayHoveredAnimation();
                 }
@@ -49,18 +55,33 @@ public class ShipSelection : MonoBehaviour
 
     private void ResetHover()
     {
-        if (isShipHovered)
+        if (_isShipHovered)
         {
-            isShipHovered = false;
+            _isShipHovered = false;
             _hoveredShip.ResetHoveredAnimation();
             _hoveredShip = null;
-            // Здесь при необходимости можно вызвать метод остановки анимации наведения, 
-            // например: _hoveredShip.StopHoveredAnimation();
         }
     }
 
-    public void SwitchSelection(bool isOn)
+    private void HandleGameLoopChanged(GameState gameState)
     {
-        isActive = isOn;
+        if (gameState != GameState.ShipSelect)
+        {
+            SwitchSelection(false);
+            return;
+        }
+        
+
+        SwitchSelection(true);
+    }
+
+    private void SwitchSelection(bool isOn)
+    {
+        _isActive = isOn;
+    }
+
+    private void OnDestroy()
+    {
+        gameLoop.GameStateChanged -= HandleGameLoopChanged;
     }
 }
