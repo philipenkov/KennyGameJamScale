@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 45744898}
   - component: {fileID: 45744899}
+  - component: {fileID: 45744900}
   m_Layer: 0
   m_Name: ShipPlacement
   m_TagString: Untagged
@@ -148,7 +149,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1572919479}
   m_Father: {fileID: 47713742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &45744899
@@ -163,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c59b6420be83f4b83006bf2c0d8dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipPlacement
+  globalLoop: {fileID: 693981683}
+  enemyShipPlacement: {fileID: 45744900}
   mainCamera: {fileID: 330585545}
   board: {fileID: 531240605}
   boardLayer:
@@ -175,6 +179,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3133b7d02e0bf7d44907f6415a5dc9a1, type: 2}
   - {fileID: 11400000, guid: 4f0145d5f824b8c439f5643eed1f1669, type: 2}
   - {fileID: 11400000, guid: b0993c6e835208f4c83db8a4f7aa7a4e, type: 2}
+--- !u!114 &45744900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45744897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c2374f3dc049e5bacbba0c5c4c99c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShipPlacement
+  board: {fileID: 531240605}
+  placementConfigs:
+  - {fileID: 11400000, guid: b4def29656e62de49bf48add68307c4e, type: 2}
+  - {fileID: 11400000, guid: 1b12f31c29817464aab0b2ec7509dd63, type: 2}
+  - {fileID: 11400000, guid: 4ac9bcf1fb6c42c42b2f8c9687cb9345, type: 2}
 --- !u!1 &47713741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,15 +1125,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572919478}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.77977, y: -31.2, z: -1.87716}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -31.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 804115589}
   - {fileID: 460327751}
   - {fileID: 550019658}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 45744898}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1797887857
 GameObject:
@@ -1158,4 +1179,3 @@ SceneRoots:
   - {fileID: 925019833}
   - {fileID: 140624499}
   - {fileID: 531240606}
-  - {fileID: 1572919479}

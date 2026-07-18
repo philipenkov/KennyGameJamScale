@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,9 @@ public enum PlaceDirection
 
 public class ShipPlacement : MonoBehaviour
 {
+    [SerializeField] private GlobalLoop globalLoop;
+    [SerializeField] private EnemyShipPlacement enemyShipPlacement;
+    
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Board board;
     [SerializeField] private LayerMask boardLayer;
@@ -74,7 +78,7 @@ public class ShipPlacement : MonoBehaviour
 
             foreach (var cell in _checkedCells)
             {
-                cell.Occupy();
+                cell.Occupy(false);
             }
 
             Quaternion rotation;
@@ -86,7 +90,8 @@ public class ShipPlacement : MonoBehaviour
             ShowShipToPlace();
             if (_currentConfigId >= placementConfigs.Length)
             {
-                //TODO: закончилась фаза расстановки
+                enemyShipPlacement.PlaceEnemyShips();
+                globalLoop.GoToNextState();
                 return;
             }
         }

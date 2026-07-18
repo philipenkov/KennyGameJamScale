@@ -4,6 +4,7 @@ public class Cell
 {
     public Vector2Int Position { get; private set; }
     public bool IsOccupied { get; private set; }
+    public bool IsEnemyCell { get; private set; }
 
     public Cell(int x, int y)
     {
@@ -12,9 +13,10 @@ public class Cell
         IsOccupied = false;
     }
 
-    public void Occupy()
+    public void Occupy(bool isEnemyCell)
     {
         IsOccupied = true;
+        IsEnemyCell = isEnemyCell;
     }
 
     public void Reset()
