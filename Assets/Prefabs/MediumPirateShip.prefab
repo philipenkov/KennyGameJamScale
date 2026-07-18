@@ -52,14 +52,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4516409985433118633, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2952464589079320473, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8782145143386604093}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1614926034881086483, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5941275329366333944}
   m_SourcePrefab: {fileID: 100100000, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+--- !u!1 &5132033949046099710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1614926034881086483, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 5859740583638944493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5941275329366333944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132033949046099710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593d9f43b356e714fb03b462bd4e204c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShip
+  model: {fileID: 8069458705423920452}
+--- !u!1 &8069458705423920452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4516409985433118633, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 5859740583638944493}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8766461068282387828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2952464589079320473, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}

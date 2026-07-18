@@ -195,16 +195,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4516409985433118633, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2952464589079320473, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1889797388335820703}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1614926034881086483, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6220760311977182824}
   m_SourcePrefab: {fileID: 100100000, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
 --- !u!4 &4986368638971981902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2952464589079320473, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
   m_PrefabInstance: {fileID: 7911242610435205079}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6010022705932796030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4516409985433118633, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 7911242610435205079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8909034380701377476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1614926034881086483, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 7911242610435205079}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6220760311977182824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909034380701377476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593d9f43b356e714fb03b462bd4e204c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShip
+  model: {fileID: 6010022705932796030}

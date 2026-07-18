@@ -11,13 +11,15 @@ public class EnemyShipPlacement : MonoBehaviour
         foreach (PlacementConfig placementConfig in placementConfigs)
         {
             int numberOfCells = placementConfig.NumberOfCells;
-            GameObject enemyShip;
+            GameObject enemyShipObject;
 
             if (numberOfCells == 1)
             {
                 Cell cell = board.GetRandomFreeCell();
                 cell.Occupy(true);
-                enemyShip = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(cell.Position), Quaternion.identity);
+                enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(cell.Position), Quaternion.identity);
+                
+                TurnOffTheModel(enemyShipObject);
                 continue;
             }
             
@@ -29,7 +31,22 @@ public class EnemyShipPlacement : MonoBehaviour
             
             Quaternion rotation;
             rotation = Quaternion.Euler(0, freeCells[1].Position.x > freeCells[0].Position.x ? 90 : 0, 0);
-            enemyShip = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(freeCells[0].Position), rotation);
+            enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(freeCells[0].Position), rotation);
+            
+            TurnOffTheModel(enemyShipObject);
         }
+    }
+
+    private void TurnOffTheModel(GameObject enemyShipObject)
+    {
+        EnemyShip enemyShip;
+        enemyShip = enemyShipObject.GetComponent<EnemyShip>();
+        if (enemyShip == null)
+        {
+            Debug.LogError("EnemyShip component not found on the instantiated ship object.", this);
+            return;
+        }
+                
+        enemyShip.SwitchModel(false);
     }
 }
