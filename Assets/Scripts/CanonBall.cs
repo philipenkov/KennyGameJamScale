@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class CanonBall : MonoBehaviour
 {
+    public event Action OnHit; 
+    
     [SerializeField] private Board board;
     [SerializeField] private Rigidbody rb;
     
@@ -11,6 +14,14 @@ public class CanonBall : MonoBehaviour
         {
             board.HandleCanonBallHit(transform.position);
             gameObject.SetActive(false);
+            OnHit?.Invoke();
+            return;
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
+        {
+            gameObject.SetActive(false);
+            OnHit?.Invoke();
         }
     }
 
