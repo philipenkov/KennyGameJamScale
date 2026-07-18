@@ -22,7 +22,7 @@ public class ShipPlacement : MonoBehaviour
     [SerializeField] private PlacementConfig[] placementConfigs;
 
     private int _currentConfigId;
-    private PlaceDirection _currentDirection = PlaceDirection.Right;
+    private PlaceDirection _currentDirection = PlaceDirection.Up;
     private bool _isActive;
     private FollowingShip _currentShip;
     private List<Cell> _checkedCells = new List<Cell>();
