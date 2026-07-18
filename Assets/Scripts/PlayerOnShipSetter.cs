@@ -7,6 +7,7 @@ public class PlayerOnShipSetter : MonoBehaviour
     [SerializeField] private Transform cameraDefaultParent;
     [SerializeField] private float flightDuration = 2.0f;
     [SerializeField] private ShipSelection shipSelection;
+    [SerializeField] private GameLoop gameLoop;
 
     private PlayerFPS _playerFPS;
     private Vector3 _cameraOnPlayerPlacePosition;
@@ -56,6 +57,7 @@ public class PlayerOnShipSetter : MonoBehaviour
         cameraTransform.SetParent(_playerFPS.CameraPlace);
 
         player.SetActive(true);
+        gameLoop.GoToNextState();
     }
 
     private void OnDestroy()

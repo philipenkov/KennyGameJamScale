@@ -23,4 +23,12 @@ public class Cell
     {
         IsOccupied = false;
     }
+
+    public void HandleCanonBallHit()
+    {
+        if (IsOccupied && IsEnemyCell)
+        {
+            Debug.Log("HIT");
+        }
+    }
 }
