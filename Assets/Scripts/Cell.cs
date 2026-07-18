@@ -3,22 +3,22 @@
 public class Cell
 {
     public Vector2Int Position { get; private set; }
-    public bool HasShip { get; set; }
+    public bool IsOccupied { get; set; }
 
     public Cell(int x, int y)
     {
         Position = new Vector2Int(x, y);
 
-        HasShip = false;
+        IsOccupied = false;
     }
 
-    public void PlaceShip()
+    public void Occupy()
     {
-        HasShip = true;
+        IsOccupied = true;
     }
 
     public void Reset()
     {
-        HasShip = false;
+        IsOccupied = false;
     }
 }
