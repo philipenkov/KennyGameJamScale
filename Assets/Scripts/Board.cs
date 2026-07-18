@@ -88,6 +88,7 @@ public class Board : MonoBehaviour
         var cellPosition = WorldToCell(hitPosition);
         Cell cell = GetCell(cellPosition);
         cell.HandleCanonBallHit();
+        
         Debug.Log($"Placed on Water and got {cellPosition}");
     }
 

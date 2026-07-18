@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerOnShipSetter : MonoBehaviour
 {
+    [SerializeField] private ShootLogic shootLogic;
     [SerializeField] private GameObject player;
     [SerializeField] private Transform cameraDefaultParent;
     [SerializeField] private float flightDuration = 2.0f;
@@ -16,15 +17,16 @@ public class PlayerOnShipSetter : MonoBehaviour
         _playerFPS = player.GetComponent<PlayerFPS>();
         player.SetActive(false);
         shipSelection.ShipClicked += PlacePlayerOnShip;
+        shootLogic.OnShot += SetCameraToDefault;
     }
 
     private void PlacePlayerOnShip(Ship ship)
     {
         player.transform.position = ship.PlayerSpawnTransform.position;
-        StartCoroutine(CameraFlight());
+        StartCoroutine(CameraFlightToPlayer());
     }
 
-    private IEnumerator CameraFlight()
+    private IEnumerator CameraFlightToPlayer()
     {
         Transform cameraTransform = Camera.main != null ? Camera.main.transform : null;
         if (cameraTransform == null)
@@ -60,8 +62,53 @@ public class PlayerOnShipSetter : MonoBehaviour
         gameLoop.GoToNextState();
     }
 
+    public void SetCameraToDefault()
+    {
+        StartCoroutine(CameraFLightToDefault());
+    }
+
+    private IEnumerator CameraFLightToDefault()
+    {
+        Transform cameraTransform = Camera.main != null ? Camera.main.transform : null;
+        if (cameraTransform == null)
+        {
+            yield break;
+        }
+
+        player.SetActive(false);
+        cameraTransform.SetParent(null);
+
+        Vector3 startPosition = cameraTransform.position;
+        Quaternion startRotation = cameraTransform.rotation;
+        
+        float elapsed = 0f;
+
+        while (elapsed < flightDuration)
+        {
+            elapsed += Time.deltaTime;
+            float clamp = Mathf.Clamp01(elapsed / flightDuration);
+            float easedClamp = Mathf.SmoothStep(0f, 1f, clamp);
+
+            Vector3 targetPosition = cameraDefaultParent != null ? cameraDefaultParent.position : startPosition;
+            Quaternion targetRotation = cameraDefaultParent != null ? cameraDefaultParent.rotation : startRotation;
+
+            cameraTransform.position = Vector3.Lerp(startPosition, targetPosition, easedClamp);
+            cameraTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, easedClamp);
+
+            yield return null;
+        }
+
+        if (cameraDefaultParent != null)
+        {
+            cameraTransform.position = cameraDefaultParent.position;
+            cameraTransform.rotation = cameraDefaultParent.rotation;
+            cameraTransform.SetParent(cameraDefaultParent);
+        }
+    }
+
     private void OnDestroy()
     {
         shipSelection.ShipClicked -= PlacePlayerOnShip;
+        shootLogic.OnShot -= SetCameraToDefault;
     }
 }

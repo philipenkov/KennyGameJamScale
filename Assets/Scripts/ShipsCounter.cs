@@ -14,10 +14,12 @@ public class ShipsCounter : MonoBehaviour
     public void AddShip(IDamageable ship)
     {
         _ships.Add(ship);
+        
         if (ship is Ship)
             _playerShips++;
         else
             _enemyShips++;
+        
         ship.OnDeath += RegisterShipDeath;
     }
 

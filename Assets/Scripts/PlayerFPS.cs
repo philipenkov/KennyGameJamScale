@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,14 +17,13 @@ public class PlayerFPS : MonoBehaviour
     [SerializeField] private float lowerLookLimit = 80f;
 
     public Transform CameraPlace => cameraPlace;
-
     
     private CharacterController _characterController;
     private Vector3 _velocity;
     private float _verticalRotation = 0f;
     private bool _isGrounded;
 
-    void Start()
+    void OnEnable()
     {
         _characterController = GetComponent<CharacterController>();
 
@@ -108,5 +108,11 @@ public class PlayerFPS : MonoBehaviour
         {
             canonTransform.localRotation = Quaternion.Euler(_verticalRotation, 0f, 0f);
         }
+    }
+
+    private void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

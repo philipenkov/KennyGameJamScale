@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ShootLogic : MonoBehaviour
 {
+    public event Action OnShot;
+    
     [SerializeField] private GameLoop gameLoop;
     [SerializeField] private GameObject canonBall;
     [SerializeField] private Transform firePoint;
@@ -29,6 +32,7 @@ public class ShootLogic : MonoBehaviour
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             Shoot();
+            OnShot?.Invoke();
         }
     }
 
@@ -49,6 +53,16 @@ public class ShootLogic : MonoBehaviour
         if (_hasShot)
             return;
         
+        _hasShot = true;
+        _isActive = false;
+        gameLoop.GoToNextState();
+
+        StartCoroutine(DelayBeforeShot());
+    }
+
+    private IEnumerator DelayBeforeShot()
+    {
+        yield return new WaitForSeconds(2f);
         canonBall.transform.position = firePoint.position;
         canonBall.transform.rotation = firePoint.rotation;
         canonBall.SetActive(true);
@@ -56,8 +70,6 @@ public class ShootLogic : MonoBehaviour
         {
             _ballRb.linearVelocity = firePoint.forward * shotPower;
         }
-        
-        _hasShot = true;
     }
 
     private void OnDestroy()
