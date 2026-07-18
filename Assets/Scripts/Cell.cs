@@ -4,7 +4,9 @@ public class Cell
 {
     public Vector2Int Position { get; private set; }
     public bool IsOccupied { get; private set; }
-    public bool IsEnemyCell { get; private set; }
+
+    private bool _isHit;
+    private IDamageable _shipOnCell;
 
     public Cell(int x, int y)
     {
@@ -13,22 +15,25 @@ public class Cell
         IsOccupied = false;
     }
 
-    public void Occupy(bool isEnemyCell)
+    public void Occupy(IDamageable ship)
     {
         IsOccupied = true;
-        IsEnemyCell = isEnemyCell;
+        _shipOnCell = ship;
     }
 
     public void Reset()
     {
         IsOccupied = false;
+        _shipOnCell = null;
     }
 
     public void HandleCanonBallHit()
     {
-        if (IsOccupied && IsEnemyCell)
+        if (IsOccupied && !_isHit)
         {
+            _shipOnCell.TakeDamage();
             Debug.Log("HIT");
+            _isHit = true;
         }
     }
 }

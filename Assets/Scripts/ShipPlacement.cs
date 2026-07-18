@@ -14,6 +14,7 @@ public class ShipPlacement : MonoBehaviour
 {
     [SerializeField] private GlobalLoop globalLoop;
     [SerializeField] private EnemyShipPlacement enemyShipPlacement;
+    [SerializeField] private ShipsCounter shipsCounter;
     
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Board board;
@@ -77,17 +78,22 @@ public class ShipPlacement : MonoBehaviour
         if (!ArePlacesFree(cellPosition, _currentDirection, placementConfigs[_currentConfigId],
                 ref _checkedCells))
             return;
-        
-        foreach (var cell in _checkedCells)
-        {
-            cell.Occupy(false);
-        }
 
         Quaternion rotation;
 
         rotation = Quaternion.Euler(0, _currentDirection == PlaceDirection.Up ? 0 : 90, 0);
 
         GameObject realShipObject = Instantiate(placementConfigs[_currentConfigId].ShipPrefab, board.CellToWorld(cellPosition), rotation);
+        IDamageable damageableShip = realShipObject.GetComponent<IDamageable>();
+        damageableShip.SetHP(placementConfigs[_currentConfigId].NumberOfCells);
+        
+        foreach (var cell in _checkedCells)
+        {
+            cell.Occupy(damageableShip);
+        }
+        
+        shipsCounter.AddShip(damageableShip);
+        
         _currentConfigId++;
         ShowShipToPlace();
         

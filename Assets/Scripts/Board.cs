@@ -83,6 +83,14 @@ public class Board : MonoBehaviour
         return freeCells[Random.Range(0, freeCells.Count)];
     }
 
+    public void HandleCanonBallHit(Vector3 hitPosition)
+    {
+        var cellPosition = WorldToCell(hitPosition);
+        Cell cell = GetCell(cellPosition);
+        cell.HandleCanonBallHit();
+        Debug.Log($"Placed on Water and got {cellPosition}");
+    }
+
     public List<Cell> GetFreeCellsSequence(int numberOfCells)
     {
         var totalValidCount = 0;

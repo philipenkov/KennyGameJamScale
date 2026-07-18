@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShipPlacement
   globalLoop: {fileID: 693981683}
   enemyShipPlacement: {fileID: 45744900}
+  shipsCounter: {fileID: 205275555}
   mainCamera: {fileID: 330585545}
   board: {fileID: 531240605}
   boardLayer:
@@ -196,6 +197,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4def29656e62de49bf48add68307c4e, type: 2}
   - {fileID: 11400000, guid: 1b12f31c29817464aab0b2ec7509dd63, type: 2}
   - {fileID: 11400000, guid: 4ac9bcf1fb6c42c42b2f8c9687cb9345, type: 2}
+  shipsCounter: {fileID: 205275555}
 --- !u!1 &47713741
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +232,7 @@ Transform:
   - {fileID: 511531424}
   - {fileID: 237755435}
   - {fileID: 690499702}
+  - {fileID: 205275554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &59425721 stripped
@@ -327,6 +330,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &205275553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205275554}
+  - component: {fileID: 205275555}
+  m_Layer: 0
+  m_Name: ShipsCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &205275554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205275553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47713742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &205275555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205275553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa22aa712b35406283549402689d3082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipsCounter
 --- !u!1 &215195300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,10 +1457,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 690499702}
     m_Modifications:
-    - target: {fileID: 1160317592068271855, guid: ddf68c3d02db07c4989d36695090d537, type: 3}
-      propertyPath: m_Mass
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 4862257478657326612, guid: ddf68c3d02db07c4989d36695090d537, type: 3}
       propertyPath: m_Name
       value: CanonBall
