@@ -9,5 +9,13 @@ public enum ShipType
 
 public class Ship : MonoBehaviour
 {
-    
+    public void PlayHoveredAnimation()
+    {
+        
+    }
+
+    public void ResetHoveredAnimation()
+    {
+        
+    }
 }

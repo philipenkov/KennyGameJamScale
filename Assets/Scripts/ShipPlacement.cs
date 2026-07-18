@@ -39,14 +39,16 @@ public class ShipPlacement : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            _currentDirection = _currentDirection == PlaceDirection.Right ? PlaceDirection.Up : PlaceDirection.Right;
-            _currentShip.Rotate(_currentDirection);
-        }
-        
         if (_isActive)
+        {
+            if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
+            {
+                _currentDirection = _currentDirection == PlaceDirection.Right ? PlaceDirection.Up : PlaceDirection.Right;
+                _currentShip.Rotate(_currentDirection);
+            }
+            
             RaycastToField();
+        }
     }
 
     private void RaycastToField()
@@ -72,33 +74,29 @@ public class ShipPlacement : MonoBehaviour
     {
         var cellPosition = board.WorldToCell(position);
 
-        if (ArePlacesFree(cellPosition, _currentDirection, placementConfigs[_currentConfigId], ref _checkedCells))
+        if (!ArePlacesFree(cellPosition, _currentDirection, placementConfigs[_currentConfigId],
+                ref _checkedCells))
+            return;
+        
+        foreach (var cell in _checkedCells)
         {
-            Debug.Log("===PLACED");
-
-            foreach (var cell in _checkedCells)
-            {
-                cell.Occupy(false);
-            }
-
-            Quaternion rotation;
-
-            rotation = Quaternion.Euler(0, _currentDirection == PlaceDirection.Up ? 0 : 90, 0);
-
-            GameObject realShipObject = Instantiate(placementConfigs[_currentConfigId].ShipPrefab, board.CellToWorld(cellPosition), rotation);
-            _currentConfigId++;
-            ShowShipToPlace();
-            if (_currentConfigId >= placementConfigs.Length)
-            {
-                enemyShipPlacement.PlaceEnemyShips();
-                globalLoop.GoToNextState();
-                return;
-            }
+            cell.Occupy(false);
         }
-        else
-        {
-            Debug.Log("===NOT PLACED");
-        }
+
+        Quaternion rotation;
+
+        rotation = Quaternion.Euler(0, _currentDirection == PlaceDirection.Up ? 0 : 90, 0);
+
+        GameObject realShipObject = Instantiate(placementConfigs[_currentConfigId].ShipPrefab, board.CellToWorld(cellPosition), rotation);
+        _currentConfigId++;
+        ShowShipToPlace();
+        
+        if (_currentConfigId < placementConfigs.Length)
+            return;
+        
+        enemyShipPlacement.PlaceEnemyShips();
+        globalLoop.GoToNextState();
+        _isActive = false;
     }
 
     private bool ArePlacesFree(Vector2Int startCellPosition, PlaceDirection direction, PlacementConfig config, ref List<Cell> checkedCells)
