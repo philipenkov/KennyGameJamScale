@@ -12,15 +12,18 @@ public class ShootLogic : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float shotPower;
     [SerializeField] private float delayBeforeShot = 2.5f;
+    [SerializeField] private GameObject shootSoundObject;
     
     private bool _isActive;
     private bool _hasShot;
     private Rigidbody _ballRb;
+    private AudioSource _shotAudioSource;
 
     private void Awake()
     {
         gameLoop.GameStateChanged += HandleGameStateChange;
         _ballRb = canonBall.GetComponent<Rigidbody>();
+        _shotAudioSource = shootSoundObject.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -67,6 +70,9 @@ public class ShootLogic : MonoBehaviour
         canonBall.transform.position = firePoint.position;
         canonBall.transform.rotation = firePoint.rotation;
         canonBall.SetActive(true);
+        shootSoundObject.transform.position = firePoint.position;
+        _shotAudioSource.Play();
+        
         if (_ballRb != null)
         {
             _ballRb.linearVelocity = firePoint.forward * shotPower;

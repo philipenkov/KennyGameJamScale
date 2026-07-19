@@ -9,10 +9,13 @@ public class EnemyTurnLogic : MonoBehaviour
     [SerializeField] private GameLoop gameLoop;
     [SerializeField] private float enemyTurnDelay = 2;
     [SerializeField] private float canonBallAnimationDelay = 1;
+    [SerializeField] private float afterShotSoundDelay = 1.5f;
     [SerializeField] private EnemyShotAnimator enemyShotAnimator;
+    [SerializeField] private AudioSource shotAudioSource;
 
     private WaitForSeconds _delay;
     private WaitForSeconds _canonBallAnimationDelay;
+    private WaitForSeconds _afterShotSoundDelay;
 
     private IDamageable _currentTarget;
     private readonly List<Cell> _currentTargetHits = new List<Cell>();
@@ -27,6 +30,7 @@ public class EnemyTurnLogic : MonoBehaviour
     {
         _delay = new WaitForSeconds(enemyTurnDelay);
         _canonBallAnimationDelay = new WaitForSeconds(canonBallAnimationDelay);
+        _afterShotSoundDelay =  new WaitForSeconds(afterShotSoundDelay);
         gameLoop.GameStateChanged += HandleGameStateChange;
     }
     
@@ -47,6 +51,8 @@ public class EnemyTurnLogic : MonoBehaviour
     private IEnumerator DoHit(Cell targetCell)
     {
         yield return _delay;
+        shotAudioSource.Play();
+        yield return _afterShotSoundDelay;
         enemyShotAnimator.PlayAnimationOnCell(targetCell);
         yield return _canonBallAnimationDelay;
 
