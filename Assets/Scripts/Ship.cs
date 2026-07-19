@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public interface IDamageable
@@ -21,6 +22,7 @@ public class Ship : MonoBehaviour, IDamageable
 {
     public event Action<IDamageable> OnDeath;
     
+    [SerializeField] private ShipSinkAnimator shipSinkAnimator;
     [SerializeField] private GameObject hoveredAnimationObject;
     [SerializeField] private Transform playerSpawnTransform;
     
@@ -60,7 +62,19 @@ public class Ship : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        gameObject.SetActive(false);
+        StartCoroutine(PlaySinkAnimation());
         OnDeath?.Invoke(this);
+    }
+
+    private IEnumerator PlaySinkAnimation()
+    {
+        shipSinkAnimator.PlayAnimation();
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

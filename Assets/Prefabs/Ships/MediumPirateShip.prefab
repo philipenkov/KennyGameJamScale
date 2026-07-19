@@ -71,6 +71,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5941275329366333944}
   m_SourcePrefab: {fileID: 100100000, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+--- !u!114 &630743495449379323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6453978076754430742, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 5859740583638944493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8069458705423920452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b9df3615b1d5f4392dc6f29b1a15e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSinkAnimator
 --- !u!1 &5132033949046099710 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1614926034881086483, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
@@ -88,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593d9f43b356e714fb03b462bd4e204c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShip
+  shipSinkAnimator: {fileID: 630743495449379323}
   model: {fileID: 8069458705423920452}
 --- !u!1 &8069458705423920452 stripped
 GameObject:

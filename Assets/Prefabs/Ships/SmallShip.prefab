@@ -600,6 +600,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2545515672785803890}
   m_SourcePrefab: {fileID: 100100000, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+--- !u!114 &4577541459935751170 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6453978076754430742, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 7356510598819784468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b9df3615b1d5f4392dc6f29b1a15e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipSinkAnimator
 --- !u!4 &5687713793253224589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2952464589079320473, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
@@ -622,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f2416bf5c39be44aea5402b76cd509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ship
+  shipSinkAnimator: {fileID: 4577541459935751170}
   hoveredAnimationObject: {fileID: 7264853132187013527}
   playerSpawnTransform: {fileID: 6348898920927545953}
 --- !u!65 &2545515672785803890
