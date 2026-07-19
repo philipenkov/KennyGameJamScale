@@ -2586,6 +2586,7 @@ MonoBehaviour:
   canonBall: {fileID: 2108899861356795107}
   firePoint: {fileID: 59425721}
   shotPower: 29
+  delayBeforeShot: 2.5
 --- !u!1 &693981682
 GameObject:
   m_ObjectHideFlags: 0

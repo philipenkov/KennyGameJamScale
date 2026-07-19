@@ -11,6 +11,7 @@ public class ShootLogic : MonoBehaviour
     [SerializeField] private GameObject canonBall;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float shotPower;
+    [SerializeField] private float delayBeforeShot = 2.5f;
     
     private bool _isActive;
     private bool _hasShot;
@@ -62,7 +63,7 @@ public class ShootLogic : MonoBehaviour
 
     private IEnumerator DelayBeforeShot()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(delayBeforeShot);
         canonBall.transform.position = firePoint.position;
         canonBall.transform.rotation = firePoint.rotation;
         canonBall.SetActive(true);
