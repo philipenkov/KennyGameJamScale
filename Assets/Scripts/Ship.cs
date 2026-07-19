@@ -25,6 +25,8 @@ public class Ship : MonoBehaviour, IDamageable
     [SerializeField] private ShipSinkAnimator shipSinkAnimator;
     [SerializeField] private GameObject hoveredAnimationObject;
     [SerializeField] private Transform playerSpawnTransform;
+    [SerializeField] private AudioSource hitSource;
+    [SerializeField] private AudioSource sinkSource;
     
     public Transform PlayerSpawnTransform => playerSpawnTransform;
     public int HP => _hp;
@@ -54,6 +56,7 @@ public class Ship : MonoBehaviour, IDamageable
     public void TakeDamage()
     {
         _hp--;
+        hitSource.Play();
         if (_hp <= 0)
         {
             Die();
@@ -68,8 +71,9 @@ public class Ship : MonoBehaviour, IDamageable
 
     private IEnumerator PlaySinkAnimation()
     {
+        sinkSource.Play();
         shipSinkAnimator.PlayAnimation();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7f);
         gameObject.SetActive(false);
     }
 

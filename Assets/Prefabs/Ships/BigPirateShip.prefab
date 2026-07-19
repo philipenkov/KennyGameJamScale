@@ -90,6 +90,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShip
   shipSinkAnimator: {fileID: 4660478497288114462}
   model: {fileID: 2851333465694780833}
+  hitSource: {fileID: 6643587195700624276}
+  sinkSource: {fileID: 4775096464251261208}
 --- !u!1 &2851333465694780833 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4516409985433118633, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
@@ -111,6 +113,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b9df3615b1d5f4392dc6f29b1a15e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipSinkAnimator
+--- !u!82 &4775096464251261208 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6591289302121220880, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 1818462893682661896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6643587195700624276 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4976118078229094812, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 1818462893682661896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3529918525371417418
 PrefabInstance:
   m_ObjectHideFlags: 0

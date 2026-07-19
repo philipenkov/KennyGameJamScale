@@ -1055,6 +1055,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2078619582197722662}
   m_SourcePrefab: {fileID: 100100000, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+--- !u!82 &911228523362543544 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4976118078229094812, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 5308596639899108900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1169473935643741490 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6453978076754430742, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
@@ -1066,6 +1071,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b9df3615b1d5f4392dc6f29b1a15e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipSinkAnimator
+--- !u!82 &1356456732699675956 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6591289302121220880, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
+  m_PrefabInstance: {fileID: 5308596639899108900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5778382719891925512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1845100303992302636, guid: 3e24d4d0ec0967d469f9956375f9a1f5, type: 3}
@@ -1091,6 +1101,8 @@ MonoBehaviour:
   shipSinkAnimator: {fileID: 1169473935643741490}
   hoveredAnimationObject: {fileID: 7579512781375549591}
   playerSpawnTransform: {fileID: 3119071028771763152}
+  hitSource: {fileID: 911228523362543544}
+  sinkSource: {fileID: 1356456732699675956}
 --- !u!65 &2078619582197722662
 BoxCollider:
   m_ObjectHideFlags: 0

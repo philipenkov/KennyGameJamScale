@@ -86,6 +86,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 7.51
       objectReference: {fileID: 0}
+    - target: {fileID: 1530199388648306387, guid: 33820bd621685984a8eb21c61dae454a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766968001170092496, guid: 33820bd621685984a8eb21c61dae454a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3628929189172980919, guid: 33820bd621685984a8eb21c61dae454a, type: 3}
       propertyPath: m_Name
       value: BigShip_Dummy
