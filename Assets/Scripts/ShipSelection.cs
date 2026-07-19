@@ -13,6 +13,7 @@ public class ShipSelection : MonoBehaviour
     private bool _isActive;
     private bool _isShipHovered;
     private Ship _hoveredShip;
+    private int _activatedFrame = -1;
 
     private void Start()
     {
@@ -34,6 +35,9 @@ public class ShipSelection : MonoBehaviour
         {
             if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
             {
+                if (Time.frameCount == _activatedFrame)
+                    return;
+
                 ShipClicked?.Invoke(_hoveredShip);
                 ResetHover();
                 SwitchSelection(false);
@@ -90,6 +94,8 @@ public class ShipSelection : MonoBehaviour
     private void SwitchSelection(bool isOn)
     {
         _isActive = isOn;
+        if (isOn)
+            _activatedFrame = Time.frameCount;
     }
 
     private void OnDestroy()
