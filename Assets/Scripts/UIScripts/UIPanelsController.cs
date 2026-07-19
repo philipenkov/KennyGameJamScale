@@ -8,11 +8,16 @@ namespace UIScripts
     {
         [SerializeField] private GameLoop gameLoop;
         [SerializeField] private GlobalLoop globalLoop;
+        [SerializeField] private ShipsCounter shipsCounter;
 
         [SerializeField] private HintPanel placeShips;
         [SerializeField] private HintPanel selectShip;
         [SerializeField] private HintPanel aim;
         [SerializeField] private HintPanel enemyTurn;
+
+        [SerializeField] private ResultPanel wonResults;
+        [SerializeField] private ResultPanel lostResults;
+        
 
         private bool _isAllowed = true;
         private bool _madeLoop;
@@ -21,6 +26,8 @@ namespace UIScripts
         {
             gameLoop.GameStateChanged += HandleGameState;
             globalLoop.GlobalStateChanged += HandleGlobalState;
+            shipsCounter.OnWon += HandleWon;
+            shipsCounter.OnLost += HandleLost;
             HandleGlobalState(GlobalState.ShipPlacement);
         }
 
@@ -69,15 +76,22 @@ namespace UIScripts
             }
         }
 
-        private void TurnOffHints()
+        private void HandleWon()
         {
-            _isAllowed = false;
+            wonResults.Show();
+        }
+
+        private void HandleLost()
+        {
+            lostResults.Show();
         }
 
         private void OnDestroy()
         {
             gameLoop.GameStateChanged -= HandleGameState;
             globalLoop.GlobalStateChanged -= HandleGlobalState;
+            shipsCounter.OnWon -= HandleWon;
+            shipsCounter.OnLost -= HandleLost;
         }
     }
 }
