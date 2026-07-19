@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,12 +15,26 @@ public class PlayerFPS : MonoBehaviour
     [SerializeField] private float upperLookLimit = -80f;
     [SerializeField] private float lowerLookLimit = 80f;
 
+    public float MouseSensitivity
+    {
+        get => mouseSensitivity;
+        set => mouseSensitivity = value;
+    }
+
     public Transform CameraPlace => cameraPlace;
     
     private CharacterController _characterController;
     private Vector3 _velocity;
     private float _verticalRotation = 0f;
     private bool _isGrounded;
+    
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey("MouseSensitivity"))
+        {
+            mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
+        }
+    }
 
     void OnEnable()
     {
