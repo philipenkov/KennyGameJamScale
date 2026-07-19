@@ -91,8 +91,6 @@ public class Board : MonoBehaviour
             return;
         
         cell.HandleCanonBallHit();
-        
-        Debug.Log($"Placed on Water and got {cellPosition}");
     }
 
     public List<Cell> GetFreeCellsSequence(int numberOfCells)

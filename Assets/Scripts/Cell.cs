@@ -40,7 +40,6 @@ public class Cell
         if (IsOccupied && !_isHit)
         {
             _shipOnCell.TakeDamage();
-            Debug.Log("HIT");
             _isHit = true;
             OnHit?.Invoke(this);
         }
