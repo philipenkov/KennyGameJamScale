@@ -6,6 +6,7 @@ public class EnemyShipPlacement : MonoBehaviour
     [SerializeField] private Board board;
     [SerializeField] private PlacementConfig[] placementConfigs;
     [SerializeField] private ShipsCounter shipsCounter;
+    [SerializeField] private Transform enemyShipsHolder;
 
     public void PlaceEnemyShips()
     {
@@ -18,6 +19,7 @@ public class EnemyShipPlacement : MonoBehaviour
             {
                 Cell cell = board.GetRandomFreeCell();
                 enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(cell.Position), Quaternion.identity);
+                enemyShipObject.transform.SetParent(enemyShipsHolder);
                 ship = enemyShipObject.GetComponent<IDamageable>();
                 cell.Occupy(ship, true);
                 ship.SetHP(1);
@@ -31,6 +33,7 @@ public class EnemyShipPlacement : MonoBehaviour
             Quaternion rotation;
             rotation = Quaternion.Euler(0, freeCells[1].Position.x > freeCells[0].Position.x ? 90 : 0, 0);
             enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(freeCells[0].Position), rotation);
+            enemyShipObject.transform.SetParent(enemyShipsHolder);
             ship = enemyShipObject.GetComponent<IDamageable>();
             foreach (Cell cell in freeCells)
             {

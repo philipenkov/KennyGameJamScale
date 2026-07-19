@@ -9,6 +9,7 @@ public class EnemyTurnLogic : MonoBehaviour
     [SerializeField] private GameLoop gameLoop;
     [SerializeField] private float enemyTurnDelay = 2;
     [SerializeField] private float canonBallAnimationDelay = 1;
+    [SerializeField] private EnemyShotAnimator enemyShotAnimator;
 
     private WaitForSeconds _delay;
     private WaitForSeconds _canonBallAnimationDelay;
@@ -46,7 +47,7 @@ public class EnemyTurnLogic : MonoBehaviour
     private IEnumerator DoHit(Cell targetCell)
     {
         yield return _delay;
-        //TODO: анимация выстрела
+        enemyShotAnimator.PlayAnimationOnCell(targetCell);
         yield return _canonBallAnimationDelay;
 
         IDamageable ship = targetCell.ShipOnCell;
