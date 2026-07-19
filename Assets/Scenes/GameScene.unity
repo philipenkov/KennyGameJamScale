@@ -316,6 +316,8 @@ MonoBehaviour:
   bigShip: {fileID: 550019659}
   placementConfigs:
   - {fileID: 11400000, guid: 3133b7d02e0bf7d44907f6415a5dc9a1, type: 2}
+  - {fileID: 11400000, guid: 3133b7d02e0bf7d44907f6415a5dc9a1, type: 2}
+  - {fileID: 11400000, guid: 4f0145d5f824b8c439f5643eed1f1669, type: 2}
   - {fileID: 11400000, guid: 4f0145d5f824b8c439f5643eed1f1669, type: 2}
   - {fileID: 11400000, guid: b0993c6e835208f4c83db8a4f7aa7a4e, type: 2}
 --- !u!114 &45744900
@@ -333,6 +335,8 @@ MonoBehaviour:
   board: {fileID: 531240605}
   placementConfigs:
   - {fileID: 11400000, guid: b4def29656e62de49bf48add68307c4e, type: 2}
+  - {fileID: 11400000, guid: b4def29656e62de49bf48add68307c4e, type: 2}
+  - {fileID: 11400000, guid: 1b12f31c29817464aab0b2ec7509dd63, type: 2}
   - {fileID: 11400000, guid: 1b12f31c29817464aab0b2ec7509dd63, type: 2}
   - {fileID: 11400000, guid: 4ac9bcf1fb6c42c42b2f8c9687cb9345, type: 2}
   shipsCounter: {fileID: 205275555}
