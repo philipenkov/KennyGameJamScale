@@ -7,6 +7,7 @@ public class EnemyShip : MonoBehaviour, IDamageable
     
     [SerializeField] private GameObject model;
 
+    public int HP => _hp;
     private int _hp;
 
     public void SwitchModel(bool isOn)

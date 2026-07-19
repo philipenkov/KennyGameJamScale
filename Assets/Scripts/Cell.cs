@@ -4,7 +4,10 @@ public class Cell
 {
     public Vector2Int Position { get; private set; }
     public bool IsOccupied { get; private set; }
-
+    public bool IsEnemyCell { get; private set; }
+    public bool IsHit => _isHit;
+    public IDamageable ShipOnCell => _shipOnCell;
+    
     private bool _isHit;
     private IDamageable _shipOnCell;
 
@@ -15,10 +18,11 @@ public class Cell
         IsOccupied = false;
     }
 
-    public void Occupy(IDamageable ship)
+    public void Occupy(IDamageable ship, bool isEnemyCell)
     {
         IsOccupied = true;
         _shipOnCell = ship;
+        IsEnemyCell = isEnemyCell;
     }
 
     public void Reset()

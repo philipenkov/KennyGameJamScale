@@ -89,7 +89,7 @@ public class ShipPlacement : MonoBehaviour
         
         foreach (var cell in _checkedCells)
         {
-            cell.Occupy(damageableShip);
+            cell.Occupy(damageableShip, false);
         }
         
         shipsCounter.AddShip(damageableShip);

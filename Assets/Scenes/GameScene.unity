@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa22aa712b35406283549402689d3082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShipsCounter
+  globalLoop: {fileID: 0}
 --- !u!1 &215195300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,6 +1757,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1194123118}
+  - component: {fileID: 1194123119}
   m_Layer: 0
   m_Name: EnemyTurnLogic
   m_TagString: Untagged
@@ -1778,6 +1780,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47713742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1194123119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194123117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99198fc255c1d0a40b108f52869b49e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTurnLogic
+  board: {fileID: 531240605}
+  gameLoop: {fileID: 215195302}
+  enemyTurnDelay: 2
 --- !u!1 &1572919478
 GameObject:
   m_ObjectHideFlags: 0

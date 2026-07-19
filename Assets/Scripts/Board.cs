@@ -12,6 +12,9 @@ public class Board : MonoBehaviour
 
     private Cell[,] _cells;
 
+    private bool _areNonEnemyCellsCollected;
+    private readonly List<Cell> _nonEnemyCellsCache = new List<Cell>();
+
     public int Width => width;
     public int Height => height;
     public float CellSize => cellSize;
@@ -190,10 +193,38 @@ public class Board : MonoBehaviour
         return sequence;
     }
 
+    public Cell GetRandomNonEnemyCell()
+    {
+        if (!_areNonEnemyCellsCollected)
+        {
+            _nonEnemyCellsCache.Clear();
+
+            foreach (var cell in _cells)
+            {
+                if (!cell.IsEnemyCell)
+                {
+                    _nonEnemyCellsCache.Add(cell);
+                }
+            }
+        }
+
+        var randomCell = _nonEnemyCellsCache[Random.Range(0, _nonEnemyCellsCache.Count)];
+        _nonEnemyCellsCache.Remove(randomCell);
+        return randomCell;
+    }
+    
+    public void RemoveCellFromNonEnemyCache(Cell cell)
+    {
+        if (_nonEnemyCellsCache.Contains(cell))
+            _nonEnemyCellsCache.Remove(cell);
+    }
+
     public void ResetBoard()
     {
         foreach (var cell in _cells)
             cell.Reset();
+
+        _areNonEnemyCellsCollected = false;
     }
 
 #if UNITY_EDITOR

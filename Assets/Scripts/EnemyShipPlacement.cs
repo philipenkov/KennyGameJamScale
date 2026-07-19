@@ -19,7 +19,7 @@ public class EnemyShipPlacement : MonoBehaviour
                 Cell cell = board.GetRandomFreeCell();
                 enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(cell.Position), Quaternion.identity);
                 ship = enemyShipObject.GetComponent<IDamageable>();
-                cell.Occupy(ship);
+                cell.Occupy(ship, true);
                 ship.SetHP(1);
                 shipsCounter.AddShip(ship);
                 
@@ -34,7 +34,7 @@ public class EnemyShipPlacement : MonoBehaviour
             ship = enemyShipObject.GetComponent<IDamageable>();
             foreach (Cell cell in freeCells)
             {
-                cell.Occupy(ship);
+                cell.Occupy(ship, true);
             }
             ship.SetHP(numberOfCells);
             shipsCounter.AddShip(ship);

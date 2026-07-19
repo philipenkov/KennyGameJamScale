@@ -4,6 +4,7 @@ using UnityEngine;
 public interface IDamageable
 {
     event Action<IDamageable> OnDeath;
+    int HP { get; }
     void SetHP(int hp);
     void TakeDamage();
     void Die();
@@ -24,6 +25,7 @@ public class Ship : MonoBehaviour, IDamageable
     [SerializeField] private Transform playerSpawnTransform;
     
     public Transform PlayerSpawnTransform => playerSpawnTransform;
+    public int HP => _hp;
 
     private int _hp;
 
