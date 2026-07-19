@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Cell
 {
+    public event Action<Cell> OnHit;
+    public event Action<Cell> OnMissed;
+    
     public Vector2Int Position { get; private set; }
     public bool IsOccupied { get; private set; }
     public bool IsEnemyCell { get; private set; }
@@ -38,6 +42,11 @@ public class Cell
             _shipOnCell.TakeDamage();
             Debug.Log("HIT");
             _isHit = true;
+            OnHit?.Invoke(this);
+        }
+        else
+        {
+            OnMissed?.Invoke(this);
         }
     }
 }

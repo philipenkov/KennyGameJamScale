@@ -18,7 +18,7 @@ public class EnemyShotAnimator : MonoBehaviour
             return;
         }
     
-        Vector3 targetPosition = board.CellToWorld(cell.Position);
+        Vector3 targetPosition = board.CellVectorToWorldPosition(cell.Position);
         
         Vector3 direction = enemyShipTransform.position - targetPosition;
         direction.y = 0f;

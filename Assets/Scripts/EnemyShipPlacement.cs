@@ -18,7 +18,7 @@ public class EnemyShipPlacement : MonoBehaviour
             if (numberOfCells == 1)
             {
                 Cell cell = board.GetRandomFreeCell();
-                enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(cell.Position), Quaternion.identity);
+                enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellVectorToWorldPosition(cell.Position), Quaternion.identity);
                 enemyShipObject.transform.SetParent(enemyShipsHolder);
                 ship = enemyShipObject.GetComponent<IDamageable>();
                 cell.Occupy(ship, true);
@@ -32,7 +32,7 @@ public class EnemyShipPlacement : MonoBehaviour
             List<Cell> freeCells = board.GetFreeCellsSequence(numberOfCells);
             Quaternion rotation;
             rotation = Quaternion.Euler(0, freeCells[1].Position.x > freeCells[0].Position.x ? 90 : 0, 0);
-            enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellToWorld(freeCells[0].Position), rotation);
+            enemyShipObject = Instantiate(placementConfig.ShipPrefab, board.CellVectorToWorldPosition(freeCells[0].Position), rotation);
             enemyShipObject.transform.SetParent(enemyShipsHolder);
             ship = enemyShipObject.GetComponent<IDamageable>();
             foreach (Cell cell in freeCells)

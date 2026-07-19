@@ -74,7 +74,7 @@ public class ShipPlacement : MonoBehaviour
 
     private void TryToPlace(Vector3 position)
     {
-        var cellPosition = board.WorldToCell(position);
+        var cellPosition = board.WorldToCellVector(position);
 
         if (!ArePlacesFree(cellPosition, _currentDirection, placementConfigs[_currentConfigId],
                 ref _checkedCells))
@@ -84,7 +84,7 @@ public class ShipPlacement : MonoBehaviour
 
         rotation = Quaternion.Euler(0, _currentDirection == PlaceDirection.Up ? 0 : 90, 0);
 
-        GameObject realShipObject = Instantiate(placementConfigs[_currentConfigId].ShipPrefab, board.CellToWorld(cellPosition), rotation);
+        GameObject realShipObject = Instantiate(placementConfigs[_currentConfigId].ShipPrefab, board.CellVectorToWorldPosition(cellPosition), rotation);
        realShipObject.transform.SetParent(playerShipHolder.transform);
         IDamageable damageableShip = realShipObject.GetComponent<IDamageable>();
         damageableShip.SetHP(placementConfigs[_currentConfigId].NumberOfCells);

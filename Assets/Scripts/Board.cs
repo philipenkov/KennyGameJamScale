@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class Board : MonoBehaviour
 {
+    public event Action<Cell[,]> OnCellsCreated;
+    
     [SerializeField] private int width = 10;
     [SerializeField] private int height = 10;
     [SerializeField] private float cellSize = 1f;
@@ -19,7 +21,7 @@ public class Board : MonoBehaviour
     public int Height => height;
     public float CellSize => cellSize;
 
-    private void Awake()
+    private void Start()
     {
         CreateBoard();
     }
@@ -29,8 +31,14 @@ public class Board : MonoBehaviour
         _cells = new Cell[width, height];
 
         for (var x = 0; x < width; x++)
-        for (var y = 0; y < height; y++)
-            _cells[x, y] = new Cell(x, y);
+        {
+            for (var y = 0; y < height; y++)
+            {
+                _cells[x, y] = new Cell(x, y);
+            }
+        }
+        
+        OnCellsCreated?.Invoke(_cells);
     }
 
     public bool IsInside(Vector2Int cell)
@@ -49,7 +57,7 @@ public class Board : MonoBehaviour
         return _cells[position.x, position.y];
     }
 
-    public Vector2Int WorldToCell(Vector3 worldPosition)
+    public Vector2Int WorldToCellVector(Vector3 worldPosition)
     {
         var local = worldPosition - origin.position;
 
@@ -59,23 +67,9 @@ public class Board : MonoBehaviour
         return new Vector2Int(x, y);
     }
 
-    public Vector3 CellToWorld(Vector2Int cell)
+    public Vector3 CellVectorToWorldPosition(Vector2Int cell)
     {
         return origin.position + new Vector3((cell.x + 0.5f) * cellSize, 0f, (cell.y + 0.5f) * cellSize);
-    }
-
-    public bool TryGetCell(Vector3 worldPosition, out Cell cell)
-    {
-        var index = WorldToCell(worldPosition);
-
-        if (!IsInside(index))
-        {
-            cell = null;
-            return false;
-        }
-
-        cell = _cells[index.x, index.y];
-        return true;
     }
 
     public Cell GetRandomFreeCell()
@@ -90,8 +84,12 @@ public class Board : MonoBehaviour
 
     public void HandleCanonBallHit(Vector3 hitPosition)
     {
-        var cellPosition = WorldToCell(hitPosition);
+        var cellPosition = WorldToCellVector(hitPosition);
         Cell cell = GetCell(cellPosition);
+        
+        if (cell == null)
+            return;
+        
         cell.HandleCanonBallHit();
         
         Debug.Log($"Placed on Water and got {cellPosition}");
