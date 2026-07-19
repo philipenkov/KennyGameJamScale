@@ -33,6 +33,7 @@ public class EnemyShip : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        model.SetActive(true);
         StartCoroutine(PlaySinkAnimation());
         OnDeath?.Invoke(this);
     }
@@ -42,6 +43,7 @@ public class EnemyShip : MonoBehaviour, IDamageable
         shipSinkAnimator.PlayAnimation();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+        model.SetActive(false);
     }
 
     private void OnDestroy()
