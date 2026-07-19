@@ -6,6 +6,7 @@ public class CellHitAnimator : MonoBehaviour
     [SerializeField] private WreckageSpawner wreckageSpawner;
     [SerializeField] private GameObject splashVFXObject;
     [SerializeField] private Board board;
+    [SerializeField] private GameObject crossIcon;
 
     private Cell[,] _subscribedCells;
 
@@ -43,6 +44,7 @@ public class CellHitAnimator : MonoBehaviour
         Vector3 spawnPosition = board.CellVectorToWorldPosition(cell.Position);
         splashVFXObject.transform.position = spawnPosition;
         splashVFXObject.SetActive(true);
+        GameObject crossIconObject = Instantiate(crossIcon, spawnPosition, Quaternion.identity);
         StartCoroutine(DisableSplashes());
         wreckageSpawner.SpawnOnPosition(spawnPosition, 1);
     }

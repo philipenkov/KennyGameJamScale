@@ -1167,6 +1167,7 @@ MonoBehaviour:
   wreckageSpawner: {fileID: 634387003}
   splashVFXObject: {fileID: 336139825}
   board: {fileID: 531240605}
+  crossIcon: {fileID: 6721270569938467398, guid: 01423aa29c4b2984f829e7cd318540ac, type: 3}
 --- !u!1 &443678534
 GameObject:
   m_ObjectHideFlags: 0
