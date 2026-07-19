@@ -41,6 +41,9 @@ public class GameLoop : MonoBehaviour
 
     public void GoToNextState()
     {
+        if (!IsActive)
+            return;
+        
         int stateCount = Enum.GetValues(typeof(GameState)).Length;
         _currentState = (GameState)(((int)_currentState + 1) % stateCount);
         GameStateChanged?.Invoke(_currentState);

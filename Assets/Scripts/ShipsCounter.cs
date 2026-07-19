@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using StateMachine;
 using UnityEngine;
 
 public class ShipsCounter : MonoBehaviour
 {
     public event Action OnLost;
     public event Action OnWon;
+
+    [SerializeField] private GlobalLoop globalLoop;
     
     private int _playerShips;
     private int _enemyShips;
@@ -32,6 +35,7 @@ public class ShipsCounter : MonoBehaviour
             {
                 OnLost?.Invoke();
                 Debug.Log("Player lost");
+                globalLoop.GoToNextState();
             }
         }
         else if (diedShip is EnemyShip)
@@ -41,6 +45,7 @@ public class ShipsCounter : MonoBehaviour
             {
                 OnWon?.Invoke();
                 Debug.Log("Player Won");
+                globalLoop.GoToNextState();
             }
         }
     }
